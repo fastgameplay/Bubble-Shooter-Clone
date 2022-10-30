@@ -11,7 +11,8 @@ public class TouchInput : MonoBehaviour
     public float Vertical { get { return _movementDelta.y; } }
     public Vector2 Axis { get { return _movementDelta; } }
 
-    private Vector2 _startTouch, _movementDelta;
+    [SerializeField] Transform _targetCenter;
+    private Vector2 _centerPosition, _movementDelta;
     private bool _tap,_hold;
 
     #region Instance
@@ -33,7 +34,10 @@ public class TouchInput : MonoBehaviour
     #endregion
 
     void Awake(){
-        _startTouch = Camera.main.WorldToScreenPoint(transform.position);
+        if(_targetCenter == null)
+            _centerPosition = Camera.main.WorldToScreenPoint(transform.position);
+        else 
+            _centerPosition = Camera.main.WorldToScreenPoint(_targetCenter.position);
     }
 
     private void Update(){
@@ -57,7 +61,7 @@ public class TouchInput : MonoBehaviour
 
 
         if(Input.GetMouseButton(0)) 
-            _movementDelta = (Vector2)Input.mousePosition - _startTouch;
+            _movementDelta = (Vector2)Input.mousePosition - _centerPosition;
         
     }
 
@@ -70,7 +74,7 @@ public class TouchInput : MonoBehaviour
             else if (Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled) 
                 _hold = false;
 
-            _movementDelta = (Vector2)Input.mousePosition - _startTouch;
+            _movementDelta = (Vector2)Input.mousePosition - _centerPosition;
 
 
         }
