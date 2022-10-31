@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class TouchInput : MonoBehaviour
 {
-    public bool Tap { get { return _tap; } }
+    public bool Began { get { return _began; } }
     public bool Hold { get { return _hold; } }
-
+    
     public float Horizontal { get { return _movementDelta.x; } }
     public float Vertical { get { return _movementDelta.y; } }
-    public Vector2 Axis { get { return _movementDelta; } }
+
+    public Vector2 AxisRaw { get { return _movementDelta; } }
+    public Vector2 AxisNormalized{
+        get{
+            if(_movementDelta.y >= 0) return _movementDelta.normalized;
+            else return new Vector2(_movementDelta.x,0.01f).normalized;
+        }
+    }
 
     [SerializeField] Transform _targetCenter;
     private Vector2 _centerPosition, _movementDelta;
-    private bool _tap,_hold;
+    private bool _began, _hold;
 
     #region Instance
     private static TouchInput _instance;
@@ -32,7 +39,7 @@ public class TouchInput : MonoBehaviour
         set { _instance = value; }
     }
     #endregion
-
+ 
     void Awake(){
         if(_targetCenter == null)
             _centerPosition = Camera.main.WorldToScreenPoint(transform.position);
@@ -41,7 +48,7 @@ public class TouchInput : MonoBehaviour
     }
 
     private void Update(){
-        _tap = false;
+        _began = false;
 #if UNITY_EDITOR
     UpdateStandalone();
 #else
@@ -54,11 +61,10 @@ public class TouchInput : MonoBehaviour
 
     private void UpdateStandalone(){
         if (Input.GetMouseButtonDown(0))
-            _tap = _hold = true;
+            _began = _hold = true;
     
         else if (Input.GetMouseButtonUp(0)) 
             _hold = false;
-
 
         if(Input.GetMouseButton(0)) 
             _movementDelta = (Vector2)Input.mousePosition - _centerPosition;
@@ -69,13 +75,13 @@ public class TouchInput : MonoBehaviour
         if (Input.touches.Length != 0)
         {
             if (Input.touches[0].phase == TouchPhase.Began)
-                _tap = _hold = true;
+                _began = _hold = true;
 
-            else if (Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled) 
+            else if (Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled) {
                 _hold = false;
+            }
 
             _movementDelta = (Vector2)Input.mousePosition - _centerPosition;
-
 
         }
     }
