@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 8592139706478591446}
   - component: {fileID: 8592139706478591449}
   - component: {fileID: 8592139706478591444}
-  - component: {fileID: 8592139706478591447}
   - component: {fileID: 8592139706478591442}
-  - component: {fileID: 8592139706478591445}
+  - component: {fileID: 5187130022576781601}
+  - component: {fileID: 58292524492477922}
   m_Layer: 0
-  m_Name: BallPrefab
-  m_TagString: ActiveBall
+  m_Name: RandomBall
+  m_TagString: StaticBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,33 +98,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!50 &8592139706478591447
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8592139706478591448}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 1
-  m_UseAutoMass: 0
-  m_Mass: 2
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &8592139706478591442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4840e0296d872ea43b748770cc409223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8592139706478591445
+--- !u!114 &5187130022576781601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,6 +125,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 8592139706478591448}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdac484d8a2078741998b71ee97652a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 83b21aff3baf97e4583fd2deb5db5940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &58292524492477922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8592139706478591448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 381ffb5abb318d447a70110d899b3fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
